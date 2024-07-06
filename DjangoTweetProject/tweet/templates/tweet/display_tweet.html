@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    CP Tweets
+{% endblock %}
+
+{% block content %}
+    <h1 class="text-center text-white mt-4">
+        A Place for all your favorite competitive programming tweets!
+    </h1>
+
+    <a class="btn btn-primary mb-4" href="{% url 'create_tweet' %}">New Tweet</a>
+    
+    <div class="row">
+        {% for tweet in tweets %}
+        <div class="col-md-4">
+            <div class="card">
+                <img class="card-img-top" src="{{ tweet.photo.url }}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title"><strong>By: </strong>{{ tweet.user.username }}</h5>
+                    <p class="card-text">{{ tweet.text }}</p>
+                    {% if tweet.user == user %}
+                    <a href="{% url 'update_tweet' tweet.id %}" class="btn btn-warning">Edit Tweet</a>
+                    <a href="{% url 'delete_tweet' tweet.id %}" class="btn btn-danger">Delete Tweet</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

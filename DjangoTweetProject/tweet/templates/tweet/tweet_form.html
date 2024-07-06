@@ -1,0 +1,24 @@
+{%extends 'base.html'%}
+
+{%block title%}
+CP Tweets
+{%endblock%}
+
+{%block content%}
+    <h1 class="text-center text-white mt-4">
+        Welcome to competitive programming tweets django project!
+    </h1>
+
+    <h2>
+        {%if form.instance.pk%} Edit Tweet
+        {%else%} Create Tweet
+        {%endif%}
+        <form class="form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit" class="btn btn-warning">Post</button>
+            
+        </form>
+            <a href="{%url 'display_tweet'%}">Home Page</a>
+    </h2>
+{%endblock%}
